@@ -97,10 +97,10 @@ export default function StaffScreen() {
         ...staffData,
         roleId: Number(staffData.roleId)
       };
-      
+
       if (editingItem) {
         const updated = await updateStaffMember({ ...formattedData, id: editingItem.id } as Staff);
-        setStaff(prev => prev.map(s => s.id === editingItem.id ? { ...editingItem, ...formattedData } : s));
+        setStaff(prev => prev.map(s => s.id === editingItem.id ? { ...editingItem, ...updated } : s));
       } else {
         const created = await createStaffMember(formattedData as Omit<Staff, 'id'>);
         setStaff(prev => [...prev, created]);

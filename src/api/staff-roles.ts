@@ -47,7 +47,7 @@ export async function updateStaffRole(role: StaffRole) {
       body: JSON.stringify(role)
     })
     if (!response.ok) throw new Error('Failed to update staff role')
-    return true
+    return await response.json() as StaffRole
   } catch (error) {
     console.error('Failed to update staff role:', error)
     throw error

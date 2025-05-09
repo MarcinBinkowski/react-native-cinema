@@ -107,7 +107,7 @@ export default function BookingsScreen() {
           id: editingItem.id,
         } as Booking);
         setBookings((prev) =>
-          prev.map((b) => (b.id === editingItem.id ? updated : b))
+          prev.map((b) => (b.id === editingItem.id ? { ...editingItem, ...updated } : b))
         );
       } else {
         const created = await createBooking(

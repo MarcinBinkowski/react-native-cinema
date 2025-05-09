@@ -47,7 +47,7 @@ export async function updateTicket(ticket: Ticket) {
       body: JSON.stringify(ticket)
     })
     if (!response.ok) throw new Error('Failed to update ticket')
-    return true
+    return await response.json() as Ticket
   } catch (error) {
     console.error('Failed to update ticket:', error)
     throw error

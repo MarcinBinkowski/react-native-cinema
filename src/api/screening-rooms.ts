@@ -1,4 +1,3 @@
-import { formatDateTimeForApi } from '#/utils/dateFormatters'
 import { API_BASE_URL, fetchOptions } from './config'
 import type { ScreeningRoom } from './types'
 
@@ -34,9 +33,9 @@ export async function createScreeningRoom(room: Omit<ScreeningRoom, 'id'>) {
       body: JSON.stringify({
         roomNumber: room.roomNumber,
         capacity: room.capacity,
-        lastCleaning: formatDateTimeForApi(room)
       })
     })
+    console.log('Response:', response.json)
     return await response.json() as ScreeningRoom
   } catch (error) {
     console.error('Failed to create screening room:', error)
@@ -52,7 +51,7 @@ export async function updateScreeningRoom(room: ScreeningRoom) {
       body: JSON.stringify(room)
     })
     if (!response.ok) throw new Error('Failed to update screening room')
-    return true
+    return await response.json() as ScreeningRoom
   } catch (error) {
     console.error('Failed to update screening room:', error)
     throw error

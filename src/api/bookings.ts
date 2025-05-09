@@ -47,7 +47,7 @@ export async function updateBooking(booking: Booking) {
       body: JSON.stringify(booking)
     })
     if (!response.ok) throw new Error('Failed to update booking')
-    return true
+    return await response.json() as Booking
   } catch (error) {
     console.error('Failed to update booking:', error)
     throw error

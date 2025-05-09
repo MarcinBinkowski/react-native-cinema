@@ -66,7 +66,7 @@ export default function StaffRolesScreen() {
     try {
       if (editingItem) {
         const updated = await updateStaffRole({ ...roleData, id: editingItem.id } as StaffRole);
-        setRoles(prev => prev.map(r => r.id === editingItem.id ? { ...editingItem, ...roleData } : r));
+        setRoles(prev => prev.map(r => r.id === editingItem.id ? { ...editingItem, ...updated } : r));
       } else {
         const created = await createStaffRole(roleData as Omit<StaffRole, 'id'>);
         setRoles(prev => [...prev, created]);

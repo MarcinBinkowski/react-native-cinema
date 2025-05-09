@@ -28,7 +28,7 @@ const screeningRoomFields: FormField<ScreeningRoom>[] = [
     name: 'capacity',
     label: 'Capacity',
     type: 'number',
-    placeholder: 'Enter room capacity',
+    placeholder: 'Enter capacity',
     required: true,
     keyboardType: 'numeric',
     validation: (value) => {
@@ -78,7 +78,7 @@ export default function ScreeningRoomsScreen() {
 
       if (editingItem) {
         const updated = await updateScreeningRoom({ ...formattedData, id: editingItem.id } as ScreeningRoom);
-        setRooms(prev => prev.map(r => r.id === editingItem.id ? updated : r));
+        setRooms(prev => prev.map(r => r.id === editingItem.id ? { ...editingItem, ...updated } : r));
       } else {
         const created = await createScreeningRoom(formattedData as Omit<ScreeningRoom, 'id'>);
         setRooms(prev => [...prev, created]);

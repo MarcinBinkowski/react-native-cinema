@@ -101,7 +101,7 @@ export default function TicketsScreen() {
 
       if (editingItem) {
         const updated = await updateTicket({ ...formattedData, id: editingItem.id } as Ticket);
-        setTickets(prev => prev.map(t => t.id === editingItem.id ? updated : t));
+        setTickets(prev => prev.map(t => t.id === editingItem.id ? { ...editingItem, ...updated } : t));
       } else {
         const created = await createTicket(formattedData as Omit<Ticket, 'id'>);
         setTickets(prev => [...prev, created]);

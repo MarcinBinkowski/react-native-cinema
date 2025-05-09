@@ -1,4 +1,4 @@
-    import { API_BASE_URL, fetchOptions } from './config'
+import { API_BASE_URL, fetchOptions } from './config'
 import type { Staff } from './types'
 
 const API_URL = `${API_BASE_URL}/Staff`
@@ -47,7 +47,7 @@ export async function updateStaffMember(staff: Staff) {
       body: JSON.stringify(staff)
     })
     if (!response.ok) throw new Error('Failed to update staff member')
-    return true
+    return await response.json() as Staff
   } catch (error) {
     console.error('Failed to update staff member:', error)
     throw error
